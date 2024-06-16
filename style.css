@@ -103,7 +103,7 @@ h3 {
   background-color: #c563ef;
 }
 
-.main__slider {
+.main__posts {
   margin-top: 3.5rem;
   margin-bottom: 3.5rem;
 }
@@ -112,10 +112,9 @@ h3 {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #c563ef;
-  width: 120px;
-  height: 120px;
+  width: 50px;
+  height: 50px;
   animation: spin 2s linear infinite;
-  grid-column: 1/3;
 }
 
 @keyframes spin {
@@ -140,7 +139,7 @@ h3 {
 }
 
 .main__posts-container-img img {
-  display: block;
+  /*display: block;*/
   width: 100%;
   height: 100%;
   object-fit: cover;
