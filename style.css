@@ -1,0 +1,159 @@
+/* СБРОС СТИЛЕЙ */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  position: relative;
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #36014e;
+  font-family: Montserrat, sans-serif;
+}
+
+a:hover {
+  color: #c563ef;
+}
+
+img button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 7.5rem;
+  margin: 0 auto;
+}
+
+.header {
+  border-bottom: 1px solid #36014e;
+  margin-bottom: 1rem;
+}
+
+.header__nav {
+  display: flex;
+  min-height: 4.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo-img {
+  width: 4.375rem;
+  height: 4.375rem;
+}
+
+.nav__companyName {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.main__title {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  color: #592e6b;
+  margin: 2.5rem;
+}
+
+.main__btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.main__btn {
+  width: 14rem;
+  min-height: 3rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #dbacef;
+  color: #36014e;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.main__btn:hover {
+  background-color: #c563ef;
+}
+
+.main__slider {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.main__posts-container-loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #c563ef;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  grid-column: 1/3;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.main__posts-container {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.main__posts-container-img {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.main__posts-container-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-out;
+}
+
+.footer {
+  background-color: #dbacef;
+  min-height: 7.5rem;
+}
+
+.footer__copyright {
+  display: flex;
+  justify-content: center;
+  padding-top: 3.5rem;
+}
