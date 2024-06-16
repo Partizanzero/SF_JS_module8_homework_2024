@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,10 +35,8 @@
       <img src="./img/cat_intro.png" />
 
       <!-- Блок вывода постов -->
-      <section class="main__slider">
-        <div class="main__posts-container">
-          <div class="main__posts-container-loader"></div>
-        </div>
+      <section class="main__posts">
+        <div class="main__posts-container"></div>
       </section>
       <!-- Конец Блока вывода постов -->
     </main>
@@ -52,6 +50,6 @@
       т.к. скрип отработает до того, как прогрузится DOM и кнопки будут получены скриптом, 
       именно поэтому скрипт лучше помещать перед </body>
       -->
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>
