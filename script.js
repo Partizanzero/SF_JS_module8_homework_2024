@@ -43,9 +43,6 @@ const getImages = (arrImages) => {
       //добавляем блок с текущим постом в конец дива со всеми постами
       postsContainer.appendChild(postElement);
     });
-
-    //скрываем лоадер
-    hideLoader();
   }
 };
 
