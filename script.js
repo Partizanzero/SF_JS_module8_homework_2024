@@ -3,8 +3,6 @@
 const loadBtn = document.querySelector(".main__load-btn"); //кнопка Загрузить картинки
 const clearBtn = document.querySelector(".main__clear-btn"); //кнопка Удалить картинки
 const postsContainer = document.querySelector(".main__posts-container"); //див, в который будем загружать все картинки
-const img = document.querySelector(".main__posts-container-img img"); //картинка
-const loader = document.querySelector(".main__posts-container-loader"); //лоадер
 
 //2. Делаем запрос на сервер через fetch()
 const fetchData = () => {
@@ -25,9 +23,28 @@ const fetchData = () => {
 <a href="${post.url}" target="_blank"><img src="${post.url}" alt="Картинка с котом ${post.id}" style="display:none;" /></a>
 <div class="main__posts-container-loader"></div>
 `;
-
         //добавляем блок с текущим постом в конец дива со всеми постами
         postsContainer.appendChild(postElement);
+      });
+
+      //получаем все дивы с картинками
+      const listImg = document.querySelectorAll(".main__posts-container-img");
+      //обходим массив дивов с картинками
+      listImg.forEach((img) => {
+        const imgItem = img.querySelector("img"); //отдельная картинка
+        const imgLoader = img.querySelector(".main__posts-container-loader"); //див с лоадером
+
+        //когда картинка загрузилась скрываем лоадер
+        imgItem.addEventListener("load", function () {
+          imgLoader.style.display = "none";
+          imgItem.style.display = "block";
+        });
+
+        img.addEventListener((error) => {
+          imgLoader.style.display = "none";
+          imgItem.style.display = "none";
+          console.error("Ошибка загрузки");
+        });
       });
     })
 
@@ -44,23 +61,3 @@ const cleanData = () => {
 //4. Вешаем Обработчики Событий на кнопки
 loadBtn.addEventListener("click", fetchData);
 clearBtn.addEventListener("click", cleanData);
-
-//если картинка загрузилась - прячем лоадер и показываем картинку
-img.addEventListener("load", function () {
-  loader.style.display = "none";
-  img.style.display = "block";
-});
-
-img.addEventListener('error', function() {
-  loader.style.display = 'none';
-  img.style.display = 'none';
-  console.error('Ошибка загрузки изображения');
-});
-/*
-
-не получается вставить данный код так, чтобы он менял стили у картинки и лоадера
-        img.addEventListener("load", function () {
-          loader.style.display = "none";
-          img.style.display = "block";
-        });
-*/
