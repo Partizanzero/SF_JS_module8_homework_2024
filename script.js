@@ -3,10 +3,8 @@ const URL = "https://api.thecatapi.com/v1/images/search?limit=10"; //адрес 
 const loadBtn = document.querySelector(".main__load-btn"); //кнопка Загрузить картинки
 const clearBtn = document.querySelector(".main__clear-btn"); //кнопка Удалить картинки
 const postsContainer = document.querySelector(".main__posts-container"); //див, в который будем загружать все картинки
-const img = document.querySelector(".main__posts-container-img img"); //картинка из json
-const loader = document.querySelector(".main__posts-container-loader"); //лоадер
 
-//2. Делаем запрос на сервер через fetch()
+//1. Делаем запрос на сервер через fetch()
 const fetchData = async () => {
   try {
     let data = await fetch(URL); //отправляем запрос на сервер
@@ -17,16 +15,12 @@ const fetchData = async () => {
       getImages(response);
     }
   } catch (error) {
-    //обрабатываем ошибки ответа сервера
     console.error(error.message);
-  } finally {
-    //скрываем лоадер при любом ответе сервера
-    hideLoader();
   }
 };
 
-//3. получаем картинки из пришедшего с сервера json
-const getImages = (arrImages) => {
+//2. получаем картинки из пришедшего с сервера json
+function getImages(arrImages) {
   if (arrImages) {
     //проходим по массиву пришедших данных и для каждого элемента массива создаем див
     arrImages.forEach((post) => {
@@ -43,20 +37,35 @@ const getImages = (arrImages) => {
       //добавляем блок с текущим постом в конец дива со всеми постами
       postsContainer.appendChild(postElement);
     });
-  }
-};
 
-//4. скрыть лоадер
-function hideLoader() {
-  loader.style.display = "none";
-  img.style.display = "block";
+    //получаем все дивы с картинками
+    const listImg = document.querySelectorAll(".main__posts-container-img");
+
+    //обходим массив дивов с картинками
+    listImg.forEach((img) => {
+      const imgItem = img.querySelector("img"); //отдельная картинка
+      const imgLoader = img.querySelector(".main__posts-container-loader"); //див с лоадером
+
+      //когда картинка загрузилась скрываем лоадер
+      imgItem.addEventListener("load", function () {
+        imgLoader.style.display = "none";
+        imgItem.style.display = "block";
+      });
+
+      img.addEventListener("error", () => {
+        imgLoader.style.display = "none";
+        imgItem.style.display = "none";
+        console.error("Ошибка загрузки");
+      });
+    });
+  }
 }
 
-//5. Логика для кнопки Удалить посты
+//3. Логика для кнопки Удалить посты
 const cleanData = () => {
   postsContainer.innerHTML = "";
 };
 
-//6. Вешаем Обработчики Событий на кнопки
+//4. Вешаем Обработчики Событий на кнопки
 loadBtn.addEventListener("click", fetchData);
 clearBtn.addEventListener("click", cleanData);
