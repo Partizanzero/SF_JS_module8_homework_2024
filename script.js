@@ -40,7 +40,7 @@ const fetchData = () => {
           imgItem.style.display = "block";
         });
 
-        img.addEventListener((error) => {
+        img.addEventListener("error", () => {
           imgLoader.style.display = "none";
           imgItem.style.display = "none";
           console.error("Ошибка загрузки");
