@@ -1,63 +1,55 @@
-//1. Получаем нужные элементы
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
 
-const loadBtn = document.querySelector(".main__load-btn"); //кнопка Загрузить картинки
-const clearBtn = document.querySelector(".main__clear-btn"); //кнопка Удалить картинки
-const postsContainer = document.querySelector(".main__posts-container"); //див, в который будем загружать все картинки
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Практическое задание: слайдер с фото</title>
+  </head>
+  <body>
+    <header class="header container">
+      <nav class="header__nav">
+        <div class="nav__logo">
+          <a href="#"><img class="nav__logo-img" src="./img/mewow.png" /></a>
+        </div>
+        <div class="nav__companyName"><a href="#">✰ L.Dr ✰</a></div>
+      </nav>
+    </header>
 
-//2. Делаем запрос на сервер через fetch()
-const fetchData = () => {
-  fetch("https://api.thecatapi.com/v1/images/search?limit=10")
-    .then((response) => response.json()) //говорим серверу, чтобы вернул ответ в json
+    <main class="main container">
+      <h1 class="main__title">КотоГалерея</h1>
 
-    //если ответ от сервера пришел - обрабатываем его
-    .then((data) => {
-      //проходим по массиву пришедших данных и для каждого элемента массива создаем див
-      data.forEach((post) => {
-        //создаем див, куда будем выводить конкретный пост
-        const postElement = document.createElement("div");
-        //задаем созданному диву класс main__posts-container-img
-        postElement.classList.add("main__posts-container-img");
+      <div class="main__btn-wrapper">
+        <button class="main__load-btn main__btn">Загрузи котиков</button>
+        <button class="main__clear-btn main__btn">Удали котиков</button>
+      </div>
+      <img src="./img/cat_intro.png" />
 
-        //заменяем содержимое созданного дива на пост
-        postElement.innerHTML = `
-<a href="${post.url}" target="_blank"><img src="${post.url}" alt="Картинка с котом ${post.id}" style="display:none;" /></a>
-<div class="main__posts-container-loader"></div>
-`;
-        //добавляем блок с текущим постом в конец дива со всеми постами
-        postsContainer.appendChild(postElement);
-      });
+      <!-- Блок вывода постов -->
+      <section class="main__posts">
+        <div class="main__posts-container"></div>
+      </section>
+      <!-- Конец Блока вывода постов -->
+    </main>
 
-      //получаем все дивы с картинками
-      const listImg = document.querySelectorAll(".main__posts-container-img");
-      //обходим массив дивов с картинками
-      listImg.forEach((img) => {
-        const imgItem = img.querySelector("img"); //отдельная картинка
-        const imgLoader = img.querySelector(".main__posts-container-loader"); //див с лоадером
+    <footer class="footer container">
+      <div class="footer__copyright">Lena Drugova © 2024</div>
+    </footer>
 
-        //когда картинка загрузилась скрываем лоадер
-        imgItem.addEventListener("load", function () {
-          imgLoader.style.display = "none";
-          imgItem.style.display = "block";
-        });
-
-        img.addEventListener((error) => {
-          imgLoader.style.display = "none";
-          imgItem.style.display = "none";
-          console.error("Ошибка загрузки");
-        });
-      });
-    })
-
-    .catch((error) => {
-      console.error("Error: ", error);
-    });
-};
-
-//3. Логика для кнопки Удалить посты
-const cleanData = () => {
-  postsContainer.innerHTML = "";
-};
-
-//4. Вешаем Обработчики Событий на кнопки
-loadBtn.addEventListener("click", fetchData);
-clearBtn.addEventListener("click", cleanData);
+    <!-- если поместить данный скрипт в <head>, то 
+      addEventListener выдаст ошибку (null) и кнопки не будут работать,
+      т.к. скрип отработает до того, как прогрузится DOM и кнопки будут получены скриптом, 
+      именно поэтому скрипт лучше помещать перед </body>
+      -->
+    <script src="script.js"></script>
+  </body>
+</html>
