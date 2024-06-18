@@ -30,7 +30,7 @@ const fetchData = () => {
       //получаем все дивы с картинками
       const listImg = document.querySelectorAll(".main__posts-container-img");
       //обходим массив дивов с картинками
-      listImg.forEach((img) => {
+      listImg.forEachs((img) => {
         const imgItem = img.querySelector("img"); //отдельная картинка
         const imgLoader = img.querySelector(".main__posts-container-loader"); //див с лоадером
 
